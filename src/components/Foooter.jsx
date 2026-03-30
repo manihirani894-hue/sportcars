@@ -40,7 +40,7 @@ const Foooter = () => {
           <p>Get the latest car deals & updates.</p>
           <div className="newsletter">
             <input type="email" placeholder="Enter your email" />
-            <button>Subscribe</button>
+            <button className='text-dark'>Subscribe</button>
           </div>
         </div>
 
@@ -93,7 +93,7 @@ const Foooter = () => {
         }
 
         .footer-section a:hover {
-          color: #fff;
+          color: #ffffff;
         }
 
         .newsletter {

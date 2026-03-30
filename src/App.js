@@ -7,8 +7,12 @@ import Signin from './components/Signin';
 import Getcars from './components/Getcars';
 import Addcars from './components/Addcars';
 import Mpesapayment from './components/Mpesapayment';
-function App() {
-  return (
+import Navbar from './components/Navbar';
+
+
+function app(){
+
+ return (
     <Router>
     <div className="App">
      <div className='App-header'>
@@ -22,6 +26,7 @@ function App() {
   
 </nav>
 
+  
      <Routes>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/Signin' element={<Signin/>}/>
@@ -32,8 +37,10 @@ function App() {
     </div>
     </Router>
 
-  );
-}
+
+ )
+};
+
   
 
-export default App;
+export default app;
