@@ -18,13 +18,14 @@ function app(){
      <div className='App-header'>
       <h1 className='text-warning bg-success'><b></b>WELCOME TO CARS PALACE</h1>
      </div>
-<nav className='m-2'>
+     <Navbar/>
+{/* <nav className='m-2'>
   <Link to="/signup" className='btn btn-outline-success ms-2'id='su'>Signup</Link>
   <Link to="/signin" className='btn btn-outline-success ms-2'>Signin</Link>
   <Link to="/addcars" className='btn btn-outline-success ms-2' id='ap'>Add cars</Link>
   <Link to="/getcars" className='btn btn-outline-success ms-2'>Get cars</Link>
   
-</nav>
+</nav> */}
 
   
      <Routes>
