@@ -1,55 +1,206 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const [user, setUser] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser ? JSON.parse(storedUser) : null);
+  }, []);
+
+  const updateCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(cart.length);
+  };
+
+  useEffect(() => {
+    updateCart();
+
+    window.addEventListener("storage", updateCart);
+
+    return () => window.removeEventListener("storage", updateCart);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/signin");
+  };
+
   return (
-    <div className="row">
-      <div className="col-md-12">
-        <nav className="navbar navbar-expand-md m-2">
+    <nav
+      style={{
+        background: "#2C3947",
+        borderBottom: "2px solid #547A95",
+        padding: "10px 0",
+      }}
+    >
+      <div className="container-fluid d-flex align-items-center justify-content-between">
+        
+        {/* BRAND */}
+        <NavLink
+          to="/"
+          style={{
+            color: "#C2A56D",
+            fontWeight: "bold",
+            fontSize: "20px",
+            textDecoration: "none",
+          }}
+        >
+          🕰 Watchstore
+        </NavLink>
 
-          {/* Brand */}
-          <Link to="/" className="navbar-brand">
-            <h1 className="text-white">MY CARS PALACE</h1>
-          </Link>
+        {/* LINKS */}
+        <ul className="d-flex align-items-center gap-3 list-unstyled m-0">
+          
+          <li>
+            <NavLink
+              style={{
+                color: "#E8EDF2",
+                textDecoration: "none",
+              }}
+              to="/"
+            >
+              Products
+            </NavLink>
+          </li>
 
-          {/* Toggle Button */}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarcollapse"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          <li>
+            <NavLink
+              style={{
+                color: "#E8EDF2",
+                textDecoration: "none",
+              }}
+              to="/addproduct"
+            >
+              Add
+            </NavLink>
+          </li>
 
-          {/* Links */}
-          <div className="collapse navbar-collapse" id="navbarcollapse">
-            <div className="navbar-nav ms-auto">
+          <li>
+            <NavLink
+              style={{
+                color: "#E8EDF2",
+                textDecoration: "none",
+              }}
+              to="/aboutus"
+            >
+              About
+            </NavLink>
+          </li>
 
-              <Link to="/getcars" className="btn btn-outline-danger ms-2">
-                Get Cars
-              </Link>
+          {/* CART */}
+          <li style={{ position: "relative" }}>
+            <NavLink
+              style={{
+                color: "#E8EDF2",
+                textDecoration: "none",
+              }}
+              to="/cart"
+            >
+              🛒 Cart
+            </NavLink>
 
-              <Link to="/signup" className="btn btn-outline-danger ms-2">
-                Signup
-              </Link>
+            {cartCount > 0 && (
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-8px",
+                  right: "-10px",
+                  background: "#C2A56D",
+                  color: "#2C3947",
+                  borderRadius: "50%",
+                  fontSize: "12px",
+                  padding: "2px 6px",
+                  fontWeight: "bold",
+                }}
+              >
+                {cartCount}
+              </span>
+            )}
+          </li>
 
-              <Link to="/signin" className="btn btn-outline-danger ms-2">
-                Signin
-              </Link>
+          <li>
+            <NavLink
+              style={{
+                color: "#E8EDF2",
+                textDecoration: "none",
+              }}
+              to="/contactus"
+            >
+              Contact
+            </NavLink>
+          </li>
 
-              <Link to="/addcars" className="btn btn-outline-danger ms-2">
-                Add Cars
-              </Link>
+          {/* USER */}
+          {user ? (
+            <>
+              <li
+                style={{
+                  color: "#C2A56D",
+                  fontWeight: "bold",
+                }}
+              >
+                👋 {user.username}
+              </li>
 
-            </div>
-          </div>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    background: "transparent",
+                    border: "1px solid #C2A56D",
+                    color: "#C2A56D",
+                    padding: "4px 10px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  style={{
+                    color: "#E8EDF2",
+                    textDecoration: "none",
+                    fontWeight: "500",
+                  }}
+                  to="/signin"
+                >
+                  Sign In
+                </NavLink>
+              </li>
 
-        </nav>
+              {/* SIGN UP */}
+              <li>
+                <NavLink
+                  to="/signup"
+                  style={{
+                   
+                    color: "#E8EDF2",
+
+                    textDecoration: "none",
+                    fontWeight: "500",
+                   
+                  }}
+                >
+                  Sign Up
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 }
 
 export default Navbar;
-

@@ -1,8 +1,10 @@
+import React, { useEffect, useState } from 'react'
+import image from'../logo.svg'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios';
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom';
 
 const Mpesapayment = () => {
+
   // declaring state variables
   const {product}=useLocation().state || {};
   const[phone,setPhone]=useState("")
@@ -33,7 +35,6 @@ setError(error.message)
   }
 
 
-
   return (
     <div className='row justify-content-center mt-2'>
       <h3 className='bg-info'>LIPA NA MPESA</h3>
@@ -46,26 +47,25 @@ setError(error.message)
        
         <img src={img_url+product.product_photo} alt={product.product_photo}/>
         <p>product name: {product.product_name}</p>
-        <p className='text-warning'>product cost: {product.product_cost}</p>
+        <p className='text-warning'>product cost(kes): {product.product_cost}</p>
 
         {/* mpesa payment form */}
        <form action="" onSubmit={handlesubmit}>
-          <label>phone number</label>
+          <label>phone number(254....)</label>
           <br/>
           <input
-          type="tell" 
+          type="tel" 
           placeholder=' Enter phone number'
           className='form-control'
           onChange={(e)=>setPhone(e.target.value)}
           /><br></br>
 
-          <button className='btn btn-danger'>make payment</button>
+          <button className='btn btn-dark'>make payment</button>
 
         </form>
       </div>
     </div>
   )
 }
-
 
 export default Mpesapayment
