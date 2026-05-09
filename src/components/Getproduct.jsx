@@ -236,7 +236,7 @@ const Getproduct = () => {
 
                 <div className="d-flex gap-2">
                   <button
-                    className="buy-btn flex-grow-1 text-danger"
+                    className="btn btn-outline-warning flex-grow-1 bg-danger"
                     onClick={() =>
                       navigate("/makepayment", {
                         state: { product },
@@ -247,7 +247,7 @@ const Getproduct = () => {
                   </button>
 
                   <button
-                    className="btn btn-outline-warning flex-grow-1 text-danger"
+                    className="btn btn-outline-warning flex-grow-1 bg-danger"
                     onClick={() => addToCart(product)}
                   >
                     Add to Cart

@@ -77,7 +77,7 @@ function Navbar() {
               }}
               to="/addproduct"
             >
-              Add
+              Add product
             </NavLink>
           </li>
 
@@ -89,7 +89,7 @@ function Navbar() {
               }}
               to="/aboutus"
             >
-              About
+              About us
             </NavLink>
           </li>
 
